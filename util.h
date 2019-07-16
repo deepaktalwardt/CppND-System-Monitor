@@ -1,7 +1,8 @@
 #include <string>
 #include <fstream>
+#include <algorithm>
 
-// Classic helper function
+// Classic helper functions
 class Util {
 
 public:
@@ -9,6 +10,9 @@ public:
 static std::string convertToTime ( long int input_seconds );
 static std::string getProgressBar(std::string percent);
 static void getStream(std::string path, std::ifstream& stream);
+
+// My Additions
+static bool isNumber(std::string str);
 };
 
 std::string Util::convertToTime (long int input_seconds){
@@ -54,4 +58,10 @@ void Util::getStream(std::string path, std::ifstream& stream){
         throw std::runtime_error("Non - existing PID");
     }
     //return stream;
+}
+
+// My additions
+bool Util::isNumber(std::string str)
+{
+    return !str.empty() && std::find_if(str.begin(), str.end(), [](char c) { return !std::isdigit(c); }) == str.end();
 }
